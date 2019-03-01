@@ -15,7 +15,8 @@ export default {
   data() {
     return {
       isLoading: false,
-      keyword: ""
+      keyword: "",
+      isError: false
     };
   },
   computed: {
@@ -35,7 +36,11 @@ export default {
       this.$store.dispatch("resetSearchResults");
       this.$store.dispatch("fetchByKeyword", keyword).then(() => {
         this.isLoading = false;
-      });
+        this.isError = false;
+      }).catch(() => {
+        this.isLoading = false;
+        this.isError = true;
+      })
     },
     handlePageClick(number) {
       this.isLoading = true;
@@ -45,6 +50,10 @@ export default {
 
       this.$store.dispatch("fetchByPage", payload).then(() => {
         this.isLoading = false;
+        this.isError = false;
+      }).catch(() => {
+        this.isLoading = false;
+        this.isError = true;
       });
     }
   }
@@ -55,7 +64,7 @@ export default {
   <div id="home" class="m-30">
     <Search v-on:SearchRequested="handleSearch" />
     <Loader v-if="isLoading" />
-    <List :events="events" />
+    <List :events="events" :isError="isError" />
     <Pagination :pagination="pagination" v-on:PageClicked="handlePageClick" />
   </div>
 </template>

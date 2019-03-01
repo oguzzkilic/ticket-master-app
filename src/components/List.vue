@@ -3,7 +3,7 @@ import getCloselySizedImage from "../helpers";
 
 export default {
   name: "List",
-  props: ["events"],
+  props: ["events", "isError"],
   methods: {
     thumbnailImage(images) {
       let thumb = null;
@@ -18,6 +18,9 @@ export default {
 
 <template>
   <div>
+    <div class="notification is-danger test-fetch-error" v-if="isError">
+      there's something wrong...
+    </div>
     <table id="list" class="table is-hoverable is-fullwidth is-striped">
       <tbody>
         <tr

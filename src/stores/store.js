@@ -17,15 +17,19 @@ const mutations = {
     Object.assign(state, getDefaultState());
   },
   setEvents(state, events) {
-    state.events = events._embedded.events;
-    state.status = "loaded";
+    if (events && events._embedded.events) {
+      state.events = events._embedded.events;
+      state.status = "loaded";
+    }
   },
   setPagination(state, pagination) {
     let links = pagination._links;
     let page = pagination.page;
 
-    state.pagination = { ...links, ...page };
-    state.status = "loaded";
+    if (pagination) {
+      state.pagination = { ...links, ...page };
+      state.status = "loaded";
+    }
   },
   setEventDetail(state, eventId) {
     const events = state.events;
