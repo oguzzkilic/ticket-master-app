@@ -41,7 +41,7 @@ yarn run deploy
 ```
 
 ### Live Demo
-(https://ticket-master-tjur0vdkq.now.sh)[https://ticket-master-tjur0vdkq.now.sh]
+[https://ticket-master-tjur0vdkq.now.sh](https://ticket-master-tjur0vdkq.now.sh)
 
 ## Tech Stack
 - Vue
